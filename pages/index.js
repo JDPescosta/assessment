@@ -51,7 +51,14 @@ const Assessment = ({}) => {
 	const step3 = () => {
 		const hex = () => {
 			// Fill in solution here; feel free to look up hexadecimal codes on the internet, but don’t look up a code solution
-			return null
+			const hexCode = [];
+
+			for(let i = 0; i < 3; i++){
+				const hex = Math.floor(Math.random() * 255).toString(16);
+				hexCode.push(hex.length < 2 ? `0${hex}` : hex);
+			}
+
+			return `#${hexCode.join('')}`
 		}
 
 		console.log(hex())
