@@ -31,16 +31,16 @@ const Assessment = ({}) => {
 	 */
 
 	const step2 = () => {
-		const remove = ({ array, values }) => {
-			// Fill in solution here
-			return null
-		}
+		const remove = ({ array, values }) => array.filter((e) => !values.includes(e));
+
 		const values = ['e', 'h', 'z']
 		const array1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 		const array2 = ['l', 'o', 'g', 'q', 'z', 'f', 'j', 'r']
+		const array3 = ['w','e','o','r','e','e','e','k','i','n','g']
 
 		console.log(remove({ array: array1, values }))
 		console.log(remove({ array: array2, values }))
+		console.log(remove({ array: array3, values }))
 	}
 
 	step2()
