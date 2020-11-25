@@ -6,22 +6,24 @@ const Assessment = ({}) => {
 	const step1 = () => {
 		const matches = ({ firstObj, secondObj }) => {
 			// Fill in solution here
-      const results = Object.keys(firstObj).map((key) => {
-        if(key in secondObj) return firstObj[key] === secondObj[key]
-      }).filter(x => x !== undefined);
-      
-			return results.length === 0 ? false : !results.includes(false);
+			const results = Object.keys(firstObj)
+				.map(key => {
+					if (key in secondObj) return firstObj[key] === secondObj[key]
+				})
+				.filter(x => x !== undefined)
+
+			return results.length === 0 ? false : !results.includes(false)
 		}
 
-		const person1 = { age: 25, hair: 'long', beard: true };
-		const person2 = { age: 26, hair: 'short', beard: true };
-		const person3 = { hair: 'long', beard: true };
-    const person4 = { name: 'terry'};
+		const person1 = { age: 25, hair: 'long', beard: true }
+		const person2 = { age: 26, hair: 'short', beard: true }
+		const person3 = { hair: 'long', beard: true }
+		const person4 = { name: 'terry' }
 
 		console.log(matches({ firstObj: person1, secondObj: person2 }))
 		console.log(matches({ firstObj: person2, secondObj: person3 }))
 		console.log(matches({ firstObj: person3, secondObj: person1 }))
-    console.log(matches({ firstObj: person3, secondObj: person4 }))
+		console.log(matches({ firstObj: person3, secondObj: person4 }))
 	}
 
 	step1()
@@ -31,12 +33,12 @@ const Assessment = ({}) => {
 	 */
 
 	const step2 = () => {
-		const remove = ({ array, values }) => array.filter((e) => !values.includes(e));
+		const remove = ({ array, values }) => array.filter(e => !values.includes(e))
 
 		const values = ['e', 'h', 'z']
 		const array1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 		const array2 = ['l', 'o', 'g', 'q', 'z', 'f', 'j', 'r']
-		const array3 = ['w','e','o','r','e','e','e','k','i','n','g']
+		const array3 = ['w', 'e', 'o', 'r', 'e', 'e', 'e', 'k', 'i', 'n', 'g']
 
 		console.log(remove({ array: array1, values }))
 		console.log(remove({ array: array2, values }))
@@ -51,11 +53,11 @@ const Assessment = ({}) => {
 	const step3 = () => {
 		const hex = () => {
 			// Fill in solution here; feel free to look up hexadecimal codes on the internet, but don’t look up a code solution
-			const hexCode = [];
+			const hexCode = []
 
-			for(let i = 0; i < 3; i++){
-				const hex = Math.floor(Math.random() * 255).toString(16);
-				hexCode.push(hex.length < 2 ? `0${hex}` : hex);
+			for (let i = 0; i < 3; i++) {
+				const hex = Math.floor(Math.random() * 255).toString(16)
+				hexCode.push(hex.length < 2 ? `0${hex}` : hex)
 			}
 
 			return `#${hexCode.join('')}`
@@ -73,13 +75,37 @@ const Assessment = ({}) => {
 	const step4 = () => {
 		const luhn = input => {
 			// Fill in solution here; feel free to look up Luhn Algorithm and how it works mathematically, but don’t look up a code solution
-			return null
+			const inputAsStr = typeof input === 'string' ? input : input.toString()
+			const luhnValues = inputAsStr.replace(/\s/g, '').split('').map(Number)
+
+			const checkNum = luhnValues.pop()
+
+			const sumNum = (a, b) => a + b
+
+			const sumOfArray = luhnValues
+				.reverse()
+				.map((val, idx) => {
+					if (idx % 2 === 0) {
+						let x = val * 2
+
+						if (x > 9) {
+							x = x.toString().split('').map(Number).reduce(sumNum)
+						}
+						return x
+					} else return val
+				})
+				.reduce(sumNum)
+
+			return (sumOfArray * 9) % 10 === checkNum
 		}
 
 		console.log(luhn('5221320000307276'))
 		console.log(luhn(6011329933655299))
 		console.log(luhn(123456789))
 		console.log(luhn('4242 4242 4242 4242'))
+		console.log(luhn('75'))
+		console.log(luhn('85'))
+		console.log(luhn('729'))
 	}
 
 	step4()
