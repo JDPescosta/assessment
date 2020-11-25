@@ -6,16 +6,22 @@ const Assessment = ({}) => {
 	const step1 = () => {
 		const matches = ({ firstObj, secondObj }) => {
 			// Fill in solution here
-			return null
+      const results = Object.keys(firstObj).map((key) => {
+        if(key in secondObj) return firstObj[key] === secondObj[key]
+      }).filter(x => x !== undefined);
+      
+			return results.length === 0 ? false : !results.includes(false);
 		}
 
-		const person1 = { age: 25, hair: 'long', beard: true }
-		const person2 = { age: 26, hair: 'short', beard: true }
-		const person3 = { hair: 'long', beard: true }
+		const person1 = { age: 25, hair: 'long', beard: true };
+		const person2 = { age: 26, hair: 'short', beard: true };
+		const person3 = { hair: 'long', beard: true };
+    const person4 = { name: 'terry'};
 
 		console.log(matches({ firstObj: person1, secondObj: person2 }))
 		console.log(matches({ firstObj: person2, secondObj: person3 }))
 		console.log(matches({ firstObj: person3, secondObj: person1 }))
+    console.log(matches({ firstObj: person3, secondObj: person4 }))
 	}
 
 	step1()
