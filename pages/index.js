@@ -15,6 +15,18 @@ const Assessment = ({}) => {
 			return results.length === 0 ? false : !results.includes(false)
 		}
 
+		/*
+			Alternative solution: your solution above is technically correct, but cumbersome. There are ways to make the code more concise.
+			See below for one such possibility.
+		 */
+
+		const alternative = ({ firstObj, secondObj }) =>
+			Object.keys(firstObj).every(key1 =>
+				Object.keys(secondObj).some(
+					key2 => key1 === key2 && firstObj[key1] === secondObj[key2]
+				)
+			)
+
 		const person1 = { age: 25, hair: 'long', beard: true }
 		const person2 = { age: 26, hair: 'short', beard: true }
 		const person3 = { hair: 'long', beard: true }
@@ -33,6 +45,8 @@ const Assessment = ({}) => {
 	 */
 
 	const step2 = () => {
+		/* Excellent */
+
 		const remove = ({ array, values }) => array.filter(e => !values.includes(e))
 
 		const values = ['e', 'h', 'z']
@@ -50,13 +64,17 @@ const Assessment = ({}) => {
 	/**
 	 * #3. Write a function to generate a random hexadecimal color code.
 	 */
+
 	const step3 = () => {
+		/* Excellent */
+
 		const hex = () => {
 			// Fill in solution here; feel free to look up hexadecimal codes on the internet, but don’t look up a code solution
 			const hexCode = []
 
 			for (let i = 0; i < 3; i++) {
 				const hex = Math.floor(Math.random() * 255).toString(16)
+				/* Surprised this worked since you defined `hexCode` as `const`... didn’t know you could `push` to a `const` */
 				hexCode.push(hex.length < 2 ? `0${hex}` : hex)
 			}
 
@@ -73,6 +91,8 @@ const Assessment = ({}) => {
 	 */
 
 	const step4 = () => {
+		/* Great work */
+
 		const luhn = input => {
 			// Fill in solution here; feel free to look up Luhn Algorithm and how it works mathematically, but don’t look up a code solution
 			const inputAsStr = typeof input === 'string' ? input : input.toString()
